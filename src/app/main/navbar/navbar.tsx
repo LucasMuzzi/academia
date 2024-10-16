@@ -37,7 +37,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLinkClick }) => {
 
       {/* Ícone do menu para mobile */}
       <div className="menu-icon" onClick={toggleMenu}>
-        {isMenuOpen ? <FaTimes /> : <FaBars />} {/* Alterna o ícone */}
+        {isMenuOpen ? <FaTimes /> : <FaBars />} 
       </div>
 
       {/* Links da Navbar, visível dependendo do estado de isMenuOpen */}
@@ -51,7 +51,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLinkClick }) => {
                 onClick={(e) => {
                   e.preventDefault();
                   onLinkClick(link.conteudo);
-                  setIsMenuOpen(false); // Fecha o menu ao clicar em um link
+                  setIsMenuOpen(false);
                 }}
               >
                 {link.name}
