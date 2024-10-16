@@ -7,48 +7,96 @@
     align-items: center;
     position: fixed;
     z-index: 1000;
-}
-
-.logo-section {
+  }
+  
+  .logo-section {
     display: flex;
     align-items: center;
     gap: 1rem;
     margin-left: 1rem;
-}
-
-.logo-section h1 {
+  }
+  
+  .logo-section h1 {
     color: white;
     font-size: 1.2rem;
-}
-
-.link-section {
+  }
+  
+  .link-section {
     height: 100%;
     background-color: red;
     align-items: center;
-    padding: 0; 
+    padding: 0;
     margin-right: 5rem;
-}
-
-.links-container {
+  }
+  
+  .links-container {
     display: flex;
     gap: 1rem;
-    height: 100%; 
-}
-
-.link-wrapper {
-    height: 100%; 
-}
-
-.links {
+    height: 100%;
+  }
+  
+  .link-wrapper {
+    height: 100%;
+  }
+  
+  .links {
     color: white;
     font-size: 1.2rem;
-    display: flex; 
-    align-items: center; 
-    height: 100%; 
-    padding: 1rem; 
-}
-
-.link-wrapper:hover .links {
-    background-color: white; 
-    color: black; 
-}
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 1rem;
+  }
+  
+  .link-wrapper:hover .links {
+    background-color: white;
+    color: black;
+  }
+  
+  /* Ícone do menu (hambúrguer) para mobile */
+  .menu-icon {
+    display: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    margin-right: 1rem;
+  }
+  
+  /* Estilos para mobile */
+  @media (max-width: 768px) {
+    .links-container {
+      flex-direction: column;
+      position: absolute;
+      top: 3.7rem; /* Posicionar logo abaixo da navbar */
+      right: 0;
+      background-color: red;
+      width: 100%;
+      height: auto;
+      display: none; /* Oculta por padrão */
+    }
+  
+    .link-section.active .links-container {
+      display: flex; /* Exibe o menu quando ativo */
+    }
+  
+    .menu-icon {
+      display: block; /* Mostra o ícone de hambúrguer no mobile */
+      
+      margin-left: 8rem;
+    }
+  
+    .link-section {
+      margin-right: 0;
+      background-color: transparent;
+    }
+  
+    .link-wrapper {
+      height: auto; /* Ajusta a altura dos links no dropdown */
+    }
+  
+    .links {
+      padding: 1rem 0;
+      text-align: center;
+    }
+  }
+  

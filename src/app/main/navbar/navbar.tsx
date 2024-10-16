@@ -1,19 +1,27 @@
+import { useState } from "react";
 import "@/src/app/main/navbar/navbar.css";
 import About from "@/src/page/about/about";
 import Contact from "@/src/page/contact/contact";
 import Image from "next/image";
 import Home from "@/src/page/home/home";
+import { FaBars, FaTimes } from "react-icons/fa"; // Ícones de abrir/fechar o menu
 
 interface NavbarProps {
   onLinkClick: (component: JSX.Element) => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onLinkClick }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const links = [
     { id: 1, name: "Home", conteudo: <Home /> },
     { id: 2, name: "Sobre", conteudo: <About /> },
     { id: 3, name: "Contato", conteudo: <Contact /> },
   ];
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <div className="mainDiv">
@@ -26,7 +34,14 @@ const Navbar: React.FC<NavbarProps> = ({ onLinkClick }) => {
         />
         <h1>Ryan Gracie SBO</h1>
       </div>
-      <div className="link-section">
+
+      {/* Ícone do menu para mobile */}
+      <div className="menu-icon" onClick={toggleMenu}>
+        {isMenuOpen ? <FaTimes /> : <FaBars />} {/* Alterna o ícone */}
+      </div>
+
+      {/* Links da Navbar, visível dependendo do estado de isMenuOpen */}
+      <div className={`link-section ${isMenuOpen ? "active" : ""}`}>
         <div className="links-container">
           {links.map((link) => (
             <div className="link-wrapper" key={link.id}>
@@ -34,8 +49,9 @@ const Navbar: React.FC<NavbarProps> = ({ onLinkClick }) => {
                 href="#"
                 className="links"
                 onClick={(e) => {
-                  e.preventDefault(); // Previne a navegação padrão do link
-                  onLinkClick(link.conteudo); // Chama a função para atualizar o conteúdo
+                  e.preventDefault();
+                  onLinkClick(link.conteudo);
+                  setIsMenuOpen(false); // Fecha o menu ao clicar em um link
                 }}
               >
                 {link.name}

@@ -8,6 +8,13 @@
     justify-content: space-between;
 }
 
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
 .footer-location {
     display: flex;
     flex-direction: column;
@@ -20,3 +27,30 @@
     margin-right: 5rem;
 }
 
+/* Estilos para mobile */
+@media (max-width: 768px) {
+    .footer-location,
+    .footer-social {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .footer-location strong,
+    .footer-social strong {
+        display: none; 
+    }
+}
+
+.footer-location {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0.1rem;
+}
+
+.footer-social {
+    display: flex;
+    flex-direction: column;
+    margin-right: 0.3rem;
+}
