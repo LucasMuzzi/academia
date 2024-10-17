@@ -53,8 +53,8 @@ const Footer: React.FC = () => {
             <span
               style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
             >
-              Endereço: Piso 2, R. Quinze de Novembro, 935 - Centro, Santa
-              Bárbara d'Oeste - SP, 13450-044
+              <strong>Endereço:</strong>Piso 2, R. Quinze de Novembro, 935 -
+              Centro, Santa Bárbara d'Oeste - SP, 13450-044
               <a
                 href="https://www.google.com/maps/place/RYAN+GRACIE+SANTA+BÁRBARA+D'OESTE/@-22.7578368,-47.4147001,15z/data=!4m6!3m5!1s0x94c89db6075ffaff:0x341e9b9003159dd7!8m2!3d-22.7578368!4d-47.4147001!16s%2Fg%2F11b77b4j3w?entry=ttu&g_ep=EgoyMDI0MTAxMy4wIKXMDSoASAFQAw%3D%3D"
                 target="_blank"
@@ -77,7 +77,6 @@ const Footer: React.FC = () => {
             justifyContent: "center",
           }}
         >
-         
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             <a
               href="https://www.instagram.com/ryangraciesantabarbara/.com"

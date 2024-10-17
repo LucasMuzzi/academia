@@ -1,59 +1,91 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
-import { Button, Collapse } from "antd"; // Importando Collapse do Ant Design
-import "./academia.css"; // Importa o arquivo CSS
-
-const { Panel } = Collapse;
+import { Button, Table } from "antd";
+import { treinos } from "@/src/page/academia/horarios";
+import "./academia.css";
 
 const Academia: React.FC = () => {
   const [treinoSelecionado, setTreinoSelecionado] = useState<string>("Jiu-Jitsu");
 
-  // Cria os horários
-  const horarios = Array.from({ length: 19 }, (_, index) => {
-    const hour = index + 6; // Começa às 6h
-    return hour < 10 ? `0${hour}:00` : `${hour}:00`; // Formata para HH:MM
-  });
+  // Cria os dias da semana
+  const diasDaSemana = Object.keys(treinos[treinoSelecionado]);
 
-  // Define os dias da semana
-  const diasDaSemana = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta"];
+  // Extrai todos os horários disponíveis
+  const todosHorarios = Array.from(
+    new Set(
+      diasDaSemana
+        .flatMap((dia) => treinos[treinoSelecionado][dia].map(({ hora }) => hora))
+    )
+  ).sort(); // Ordena os horários
+
+  // Configuração das colunas
+  const columns = [
+    {
+      title: "Horário",
+      dataIndex: "hora",
+      key: "hora",
+      width: 150,
+    },
+    ...diasDaSemana.map((dia) => ({
+      title: dia,
+      dataIndex: dia,
+      key: dia,
+      render: (descricao: string) => (
+        <div
+          style={{
+            padding: "0.5rem",
+            backgroundColor: "transparent",
+          }}
+        >
+          {descricao || "--"}
+        </div>
+      ),
+    })),
+  ];
 
   // Cria os dados para a tabela
-  const dataSource = diasDaSemana.map((dia) => ({
-    dia,
-    horarios,
-    treino: "", // Adiciona um campo para indicar se há treino
-  }));
+  const dataSource = todosHorarios.map((hora) => {
+    const rowData: any = { hora }; // Cada linha começa com o horário
+    diasDaSemana.forEach((dia) => {
+      const treino = treinos[treinoSelecionado][dia].find(
+        (t) => t.hora === hora
+      );
+      rowData[dia] = treino ? treino.descricao : null;
+    });
+    return rowData;
+  });
 
-  // Função para alterar o treino selecionado
   const handleButtonClick = (treino: string) => {
     setTreinoSelecionado(treino);
   };
 
   return (
-    <div>
-      <h1>Horários dos Treinos - {treinoSelecionado}</h1>
-      <Button onClick={() => handleButtonClick("Jiu-Jitsu")}>Jiu-Jitsu</Button>
-      <Button onClick={() => handleButtonClick("Muay Thai")}>Muay Thai</Button>
-      <Button onClick={() => handleButtonClick("Krav Maga")}>Krav Maga</Button>
+    <div style={{ marginTop: "1rem" }}>
+      <h1 style={{ marginBottom: "1rem" }}>
+        Horários dos Treinos - {treinoSelecionado}
+      </h1>
 
-      <div className="collapse-container">
-        {dataSource.map(({ dia, horarios, treino }) => (
-          <Collapse key={dia}>
-            <Panel header={dia} key={dia}>
-              <div className="horarios-container">
-                <div className="horarios">
-                  {horarios.map((horario) => (
-                    <div key={horario} className="horario">
-                      {horario}
-                    </div>
-                  ))}
-                </div>
-                <div className="treino-status">
-                  <span>{treino ? `Treino: ${treino}` : "Sem treino"}</span>
-                </div>
-              </div>
-            </Panel>
-          </Collapse>
-        ))}
+      <div className="treino-buttons">
+        <Button onClick={() => handleButtonClick("Jiu-Jitsu")}>
+          Jiu-Jitsu
+        </Button>
+        <Button onClick={() => handleButtonClick("Muay Thai")}>
+          Muay Thai
+        </Button>
+        <Button onClick={() => handleButtonClick("Krav Maga")}>
+          Krav Maga
+        </Button>
+      </div>
+
+      {/* Envolvendo a tabela em um contêiner com overflow-x */}
+      <div className="tabela-overflow">
+        <Table
+          columns={columns}
+          dataSource={dataSource}
+          pagination={false}
+          rowKey="hora"
+          style={{ marginTop: "1rem" }}
+        />
       </div>
     </div>
   );

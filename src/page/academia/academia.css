@@ -1,49 +1,66 @@
-/* Estilos gerais da tabela */
-.collapse-container {
-    margin: 20px 0;
-}
-
-.ant-collapse {
-    margin-bottom: 15px; /* Espaço entre os painéis */
-}
-
-/* Container para os horários */
-.horarios-container {
-    display: flex;
-    flex-direction: column; /* Para permitir a separação entre horários e status */
-}
-
-/* Estilo para a lista de horários */
-.horarios {
-    display: flex; /* Usa flexbox para os horários */
-    overflow-x: auto; /* Permite rolagem horizontal */
-    white-space: nowrap; /* Impede a quebra de linha dos horários */
-    width: 100%; /* Define a largura do contêiner de horários */
-    max-height: 80px; /* Limita a altura para evitar ocupação excessiva */
-    padding: 10px 0; /* Espaçamento interno */
-}
-
-/* Cada horário */
-.horario {
-    margin: 0 10px; /* Aumenta o espaçamento entre horários */
-    padding: 5px 10px; /* Preenchimento para os horários */
-    border: 1px solid #ccc; /* Borda ao redor de cada horário */
-    border-radius: 4px; /* Bordas arredondadas */
-    background-color: #f9f9f9; /* Cor de fundo leve */
-}
-
-/* Status do treino */
-.treino-status {
-    margin-top: 10px; /* Espaço acima do status do treino */
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .collapse-container {
-        width: 100%; /* Garante que o contêiner ocupe toda a largura */
-    }
+/* Envolva a tabela com overflow-x apenas nela */
+.tabela-overflow {
+    overflow-x: auto; /* Barra de rolagem horizontal apenas na tabela */
+    width: 100%;
+  }
+  
+  .collapse-container {
+      margin: 20px 0;
+  }
+  
+  .ant-collapse {
+      margin-bottom: 15px; /* Espaço entre os painéis */
+  }
+  
+  /* Container para os horários */
+  .horarios-container {
+      display: flex;
+      flex-direction: column; /* Para permitir a separação entre horários e status */
+  }
+  
+  /* Estilo para a lista de horários */
+  .horarios {
+      display: flex; /* Usa flexbox para os horários */
+      overflow-x: auto; /* Permite rolagem horizontal */
+      white-space: nowrap; /* Impede a quebra de linha dos horários */
+      width: 100%; /* Define a largura do contêiner de horários */
+      max-height: 80px; /* Limita a altura para evitar ocupação excessiva */
+      padding: 10px 0; /* Espaçamento interno */
+  }
+  
+  /* Cada horário */
+  .horario {
+      margin: 0 10px; /* Aumenta o espaçamento entre horários */
+      padding: 5px 10px; /* Preenchimento para os horários */
+   
+      border-radius: 4px; /* Bordas arredondadas */
     
-    .ant-collapse {
-        margin-bottom: 10px; /* Espaço entre os painéis */
-    }
-}
+  }
+  
+  /* Status do treino */
+  .treino-status {
+      margin-top: 10px; /* Espaço acima do status do treino */
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+      .collapse-container {
+          width: 100%; /* Garante que o contêiner ocupe toda a largura */
+      }
+      
+      .ant-collapse {
+          margin-bottom: 10px; /* Espaço entre os painéis */
+      }
+  
+      .treino-buttons {
+          display: flex;
+          justify-content: space-around; /* Mantém os botões espaçados em telas menores */
+          width: 100%; /* O contêiner ocupa toda a largura */
+      }
+  
+      /* Garantir que a tabela tenha rolagem horizontal em dispositivos móveis */
+      .tabela-overflow {
+          overflow-x: auto;
+      }
+  }
+  
